@@ -72,13 +72,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     createBoard();
 
+    var clicks = 0;
+
     function flipCard(){
+        clicks ++;
         let cardId = this.getAttribute('data-id');        
         cardsChosen.push(cardArray[cardId].name);
         cardsChosenIds.push(cardId);
         this.setAttribute('src', cardArray[cardId].img)
         if(cardsChosen.length === 2){
-            setTimeout(checkForMatch,500);
+            setTimeout(checkForMatch,100);
         }
     }
 
@@ -88,17 +91,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const optionTwoId = cardsChosenIds[1];
 
         if(optionOneId == optionTwoId){
-            alert("You have clicked the same image!");
+            alert("You have clicked the same card!");
             cards[optionOneId].setAttribute('src', 'img/blank-card.jpg');
             cards[optionTwoId].setAttribute('src', 'img/blank-card.jpg');
         }else if(cardsChosen[0] === cardsChosen[1]){
-            alert("Well done!");
+            alert("WELL DONE!");
             cards[optionOneId].setAttribute('src', 'img/removed-card.jpg');
             cards[optionTwoId].setAttribute('src', 'img/removed-card.jpg');
             cards[optionOneId].removeEventListener('click', flipCard);
             cards[optionTwoId].removeEventListener('click', flipCard);
             cardsWon.push(cardsChosen);
         }else{
+            alert("Sorry, try again.");
             cards[optionOneId].setAttribute('src', 'img/blank-card.jpg');
             cards[optionTwoId].setAttribute('src', 'img/blank-card.jpg');
         }
@@ -106,7 +110,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         cardsChosenIds = [];
         resultDisplay.textContent = cardsWon.length*10;// I put "*10" just because I liked it to show a bigger score than the length of the array.
         if(cardsWon.length === cardArray.length/2){
-            resultDisplay.textContent = "CONGRATULATIONS! YOU HAVE WON!";                      
+            resultDisplay.textContent = parseInt(cardsWon.length*10 + (10000/clicks))+ "  ************  CONGRATULATIONS, YOU HAVE WON!";
+            //resultDisplay.textContent = " CONGRATULATIONS! YOU HAVE WON!";                      
         }       
     } 
 })
