@@ -1,5 +1,5 @@
 # Memory-Game
-:video_game: Memory game desarrollado con HTML, CSS y JavaScript :elephant:
+:video_game: Memory game desarrollado con HTML, CSS y JavaScript :video_game:
 
 #### Notas:
  :space_invader: imágenes utilizadas fueron creadas también por mí. <br/>
